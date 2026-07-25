@@ -2271,13 +2271,21 @@ androidx.compose.foundation.layout.Arrangement$HorizontalOrVertical$DefaultImpls
 androidx.compose.foundation.layout.Arrangement$HorizontalOrVertical:
     public static synthetic float access$getSpacing-D9Ej5fM$jd(androidx.compose.foundation.layout.Arrangement$HorizontalOrVertical)
     public float getSpacing-D9Ej5fM()
-androidx.compose.foundation.layout.Arrangement$SpacedAligned
+androidx.compose.foundation.layout.Arrangement$SpacedAligned:
+    public static final int $stable
+    public final float component1-D9Ej5fM()
+    public final boolean component2()
+    public final kotlin.jvm.functions.Function2 component3()
+    public final androidx.compose.foundation.layout.Arrangement$SpacedAligned copy-8Feqmps(float,boolean,kotlin.jvm.functions.Function2)
+    public static synthetic androidx.compose.foundation.layout.Arrangement$SpacedAligned copy-8Feqmps$default(androidx.compose.foundation.layout.Arrangement$SpacedAligned,float,boolean,kotlin.jvm.functions.Function2,int,java.lang.Object)
+    public final kotlin.jvm.functions.Function2 getAlignment()
+    public final boolean getRtlMirror()
+    public final float getSpace-D9Ej5fM()
 androidx.compose.foundation.layout.Arrangement$Vertical$DefaultImpls
 androidx.compose.foundation.layout.Arrangement$Vertical:
     public static synthetic float access$getSpacing-D9Ej5fM$jd(androidx.compose.foundation.layout.Arrangement$Vertical)
 androidx.compose.foundation.layout.Arrangement$aligned$1
 androidx.compose.foundation.layout.Arrangement$aligned$2
-androidx.compose.foundation.layout.Arrangement$spacedBy$1
 androidx.compose.foundation.layout.Arrangement$spacedBy$2
 androidx.compose.foundation.layout.Arrangement$spacedBy$3
 androidx.compose.foundation.layout.Arrangement:
@@ -2286,7 +2294,6 @@ androidx.compose.foundation.layout.Arrangement:
     public final androidx.compose.foundation.layout.Arrangement$Vertical aligned(androidx.compose.ui.Alignment$Vertical)
     private final void forEachIndexed(int[],boolean,kotlin.jvm.functions.Function2)
     public static synthetic void getBottom$annotations()
-    public final androidx.compose.foundation.layout.Arrangement$HorizontalOrVertical getCenter()
     public static synthetic void getCenter$annotations()
     public final androidx.compose.foundation.layout.Arrangement$Horizontal getEnd()
     public static synthetic void getEnd$annotations()
@@ -2297,7 +2304,6 @@ androidx.compose.foundation.layout.Arrangement:
     public static synthetic void getSpaceEvenly$annotations()
     public static synthetic void getStart$annotations()
     public static synthetic void getTop$annotations()
-    public final androidx.compose.foundation.layout.Arrangement$HorizontalOrVertical spacedBy-0680j_4(float)
     public final androidx.compose.foundation.layout.Arrangement$Horizontal spacedBy-D5KLDUw(float,androidx.compose.ui.Alignment$Horizontal)
     public final androidx.compose.foundation.layout.Arrangement$Vertical spacedBy-D5KLDUw(float,androidx.compose.ui.Alignment$Vertical)
 androidx.compose.foundation.layout.AspectRatioElement
@@ -6828,7 +6834,6 @@ androidx.compose.ui.graphics.Color$Companion:
     public static synthetic void getGray-0d7_KjU$annotations()
     public final long getGreen-0d7_KjU()
     public static synthetic void getGreen-0d7_KjU$annotations()
-    public final long getLightGray-0d7_KjU()
     public static synthetic void getLightGray-0d7_KjU$annotations()
     public final long getMagenta-0d7_KjU()
     public static synthetic void getMagenta-0d7_KjU$annotations()
@@ -6848,7 +6853,6 @@ androidx.compose.ui.graphics.Color:
     public static final synthetic long access$getCyan$cp()
     public static final synthetic long access$getDarkGray$cp()
     public static final synthetic long access$getGreen$cp()
-    public static final synthetic long access$getLightGray$cp()
     public static final synthetic long access$getMagenta$cp()
     public static final synthetic long access$getYellow$cp()
     public static final float component1-impl(long)
@@ -26826,7 +26830,7 @@ androidx.compose.animation.core.StartOffset
 androidx.compose.animation.core.StartOffsetType$Companion
 androidx.compose.animation.core.StartOffsetType
 androidx.compose.animation.core.SuspendAnimationKt$animate$3:
-    public final androidx.compose.runtime.DisposableEffectResult invoke()
+    public final androidx.compose.runtime.DisposableEffectResult invoke(androidx.compose.runtime.DisposableEffectScope)
     public final void invoke(androidx.compose.animation.core.AnimationScope)
 androidx.compose.animation.core.SuspendAnimationKt$animate$5:
     public static final androidx.compose.animation.core.SuspendAnimationKt$animate$5 INSTANCE
@@ -27268,7 +27272,7 @@ androidx.compose.foundation.gestures.ContentInViewNode$Request:
     public static kotlin.jvm.functions.Function0 getCurrentBounds()
 androidx.compose.foundation.gestures.ContentInViewNode$WhenMappings
 androidx.compose.foundation.gestures.ContentInViewNode$launchAnimation$2$1$1:
-    public final androidx.compose.runtime.DisposableEffectResult invoke()
+    public final androidx.compose.runtime.DisposableEffectResult invoke(androidx.compose.runtime.DisposableEffectScope)
     public final java.lang.Boolean invoke()
     public static androidx.compose.ui.node.TraversableNode$Companion$TraverseDescendantsAction invoke$1()
     public static void invoke$12()
@@ -27548,18 +27552,25 @@ androidx.compose.foundation.layout.Arrangement$HorizontalOrVertical
 androidx.compose.foundation.layout.Arrangement$SpaceAround$1
 androidx.compose.foundation.layout.Arrangement$SpaceBetween$1
 androidx.compose.foundation.layout.Arrangement$SpaceEvenly$1
+androidx.compose.foundation.layout.Arrangement$SpacedAligned:
+    public final kotlin.jvm.functions.Function2 alignment
+    public final boolean rtlMirror
+    static void <clinit>()
 androidx.compose.foundation.layout.Arrangement$Start$1
 androidx.compose.foundation.layout.Arrangement$Top$1
+androidx.compose.foundation.layout.Arrangement$spacedBy$1:
+    public static java.lang.Integer invoke$2()
 androidx.compose.foundation.layout.Arrangement:
-    public static final androidx.compose.foundation.layout.Arrangement$HorizontalOrVertical Center
     public static final androidx.compose.foundation.layout.Arrangement$Horizontal End
     public static final androidx.compose.foundation.layout.Arrangement INSTANCE
     public static final androidx.compose.foundation.layout.Arrangement$HorizontalOrVertical SpaceAround
     public static final androidx.compose.foundation.layout.Arrangement$HorizontalOrVertical SpaceBetween
     public static androidx.compose.foundation.layout.Arrangement$Vertical getBottom()
+    public static androidx.compose.foundation.layout.Arrangement$HorizontalOrVertical getCenter()
     public static androidx.compose.foundation.layout.Arrangement$Center$1 getSpaceEvenly()
     public static androidx.compose.foundation.layout.Arrangement$Horizontal getStart()
     public static androidx.compose.foundation.layout.Arrangement$Vertical getTop()
+    public static androidx.compose.foundation.layout.Arrangement$HorizontalOrVertical spacedBy-0680j_4()
 androidx.compose.foundation.layout.BoxChildDataElement:
     public final kotlin.jvm.functions.Function1 inspectorInfo
     public final boolean matchParentSize
@@ -27744,7 +27755,7 @@ androidx.compose.foundation.layout.WrapContentElement$Companion$height$1:
     public final void invoke(androidx.compose.runtime.Composer,int)
     public static androidx.compose.ui.Modifier invoke$1()
     public static java.lang.Long invoke$1()
-    public final java.lang.Integer invoke$2()
+    public final java.lang.Integer invoke$3()
 androidx.compose.foundation.layout.WrapContentElement$Companion$size$1
 androidx.compose.foundation.layout.WrapContentElement$Companion$width$1
 androidx.compose.foundation.layout.WrapContentElement$Companion
@@ -29660,6 +29671,7 @@ androidx.compose.runtime.external.kotlinx.collections.immutable.implementations.
     public static int getIntersect-b3I0S0c()
     public static int getIntersect-rtfAjoo()
     public static int getLeft-dhqQ-8s()
+    public static long getLightGray-0d7_KjU()
     public static int getLighten-0nO6VwU()
     public static int getLow-f-v9h1I()
     public static int getLuminosity-0nO6VwU()
@@ -30706,7 +30718,6 @@ androidx.compose.ui.graphics.Color:
     public static final long Cyan
     public static final long DarkGray
     public static final long Green
-    public static final long LightGray
     public static final long Magenta
     public static final long Yellow
     public static synthetic long unbox-impl()
@@ -31904,9 +31915,9 @@ androidx.compose.ui.layout.AlignmentLine:
     static void <clinit>()
     public abstract kotlin.jvm.functions.Function2 getMerger$ui_release()
 androidx.compose.ui.layout.AlignmentLineKt$FirstBaseline$1:
-    public final java.lang.Integer invoke$3()
+    public final java.lang.Integer invoke$4()
 androidx.compose.ui.layout.AlignmentLineKt$LastBaseline$1:
-    public final java.lang.Integer invoke$3()
+    public final java.lang.Integer invoke$4()
 androidx.compose.ui.layout.BeyondBoundsLayout$LayoutDirection$Companion
 androidx.compose.ui.layout.BeyondBoundsLayout$LayoutDirection:
     public static final int Above
@@ -33028,7 +33039,7 @@ androidx.compose.ui.platform.AndroidComposeViewAccessibilityDelegateCompat$sortB
     public final void invoke(androidx.compose.runtime.Composer,int)
     public static void invoke$36()
     public static void invoke$37()
-    public static java.lang.Integer invoke$4()
+    public static java.lang.Integer invoke$5()
 androidx.compose.ui.platform.AndroidComposeViewAccessibilityDelegateCompat:
     public static final int $stable
     public static final androidx.compose.ui.platform.AccessibilityIterators$ParagraphTextSegmentIterator$Companion Companion
@@ -36399,6 +36410,8 @@ com.example.wearfilemanager.MainActivity:
     static void <clinit>()
 com.example.wearfilemanager.model.FileItem:
     static void <clinit>()
+com.example.wearfilemanager.ui.ActiveViewer$AudioViewer:
+    static void <clinit>()
 com.example.wearfilemanager.ui.ActiveViewer$ImageViewer:
     static void <clinit>()
 com.example.wearfilemanager.ui.ActiveViewer$TextViewer:
@@ -38119,7 +38132,7 @@ kotlinx.coroutines.flow.internal.NullSurrogateKt:
     public static final androidx.emoji2.text.EmojiProcessor$MarkExclusionCallback DONE
     public static final androidx.emoji2.text.EmojiProcessor$MarkExclusionCallback UNINITIALIZED
 kotlinx.coroutines.flow.internal.SafeCollector$collectContextSize$1:
-    public final java.lang.Integer invoke$2()
+    public final java.lang.Integer invoke$3()
 kotlinx.coroutines.flow.internal.SafeCollector:
     public static void checkContext()
     public static void exceptionTransparencyViolated()

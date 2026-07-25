@@ -32,6 +32,7 @@ sealed class ActiveViewer {
     object None : ActiveViewer()
     data class TextViewer(val file: File) : ActiveViewer()
     data class ImageViewer(val file: File) : ActiveViewer()
+    data class AudioViewer(val file: File) : ActiveViewer()
 }
 
 @Composable
@@ -84,6 +85,10 @@ fun FileManagerScreen() {
                     }
                 }
             }
+            // Audio Files -> Native Audio Player
+            ext in listOf("mp3", "wav", "m4a", "ogg", "aac", "flac") -> {
+                activeViewer = ActiveViewer.AudioViewer(file)
+            }
             // Text / Log / Code Files -> Open Native Text Viewer
             ext in listOf("txt", "log", "json", "csv", "xml", "html", "md", "py", "sh", "properties", "conf", "gradle", "kts") -> {
                 activeViewer = ActiveViewer.TextViewer(file)
@@ -115,6 +120,9 @@ fun FileManagerScreen() {
         }
         is ActiveViewer.ImageViewer -> {
             ImageViewerScreen(file = viewer.file, onClose = { activeViewer = ActiveViewer.None })
+        }
+        is ActiveViewer.AudioViewer -> {
+            AudioPlayerScreen(file = viewer.file, onClose = { activeViewer = ActiveViewer.None })
         }
         is ActiveViewer.None -> {
             Box(
