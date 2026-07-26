@@ -27646,7 +27646,7 @@ androidx.compose.foundation.layout.Arrangement:
     public static androidx.compose.foundation.layout.Arrangement$Center$1 getSpaceBetween()
     public static androidx.compose.foundation.layout.Arrangement$Horizontal getStart()
     public static androidx.compose.foundation.layout.Arrangement$Vertical getTop()
-    public static androidx.compose.foundation.layout.Arrangement$HorizontalOrVertical spacedBy-0680j_4()
+    public static androidx.compose.foundation.layout.Arrangement$SpacedAligned spacedBy-0680j_4(float)
 androidx.compose.foundation.layout.BoxChildDataElement:
     public final kotlin.jvm.functions.Function1 inspectorInfo
     public final boolean matchParentSize
@@ -36581,6 +36581,8 @@ com.example.wearfilemanager.ui.ActiveViewer$ImageViewer:
 com.example.wearfilemanager.ui.ActiveViewer$TextViewer:
     static void <clinit>()
 com.example.wearfilemanager.ui.ActiveViewer:
+    static void <clinit>()
+com.example.wearfilemanager.ui.CategoryStorageStats:
     static void <clinit>()
 com.example.wearfilemanager.ui.ImageCanvasView:
     static void <clinit>()

@@ -39,6 +39,19 @@ sealed class ActiveViewer {
     data class AudioViewer(val file: File) : ActiveViewer()
 }
 
+data class CategoryStorageStats(
+    val pdfCount: Int = 0,
+    val pdfBytes: Long = 0,
+    val imageCount: Int = 0,
+    val imageBytes: Long = 0,
+    val videoCount: Int = 0,
+    val videoBytes: Long = 0,
+    val audioCount: Int = 0,
+    val audioBytes: Long = 0,
+    val otherCount: Int = 0,
+    val otherBytes: Long = 0
+)
+
 @Composable
 fun FileManagerScreen() {
     val context = LocalContext.current
@@ -63,6 +76,10 @@ fun FileManagerScreen() {
 
     val storageInfo by remember(refreshKey) {
         mutableStateOf(getStorageStats())
+    }
+
+    val categoryStats by remember(refreshKey) {
+        mutableStateOf(calculateCategoryStats(Environment.getExternalStorageDirectory()))
     }
 
     fun openFile(fileItem: FileItem) {
@@ -136,7 +153,7 @@ fun FileManagerScreen() {
                 LazyColumn(
                     modifier = Modifier.fillMaxSize(),
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    contentPadding = PaddingValues(top = 28.dp, bottom = 24.dp)
+                    contentPadding = PaddingValues(top = 40.dp, bottom = 24.dp)
                 ) {
                     item {
                         Text(
@@ -372,13 +389,13 @@ fun FileManagerScreen() {
                     }
                 }
 
-                // Storage Info Modal Dialog
+                // Storage Info Modal Dialog with Detailed File Breakdown
                 if (showStorageDialog) {
                     Box(
                         modifier = Modifier
                             .fillMaxSize()
                             .background(Color(0xF0000000))
-                            .padding(14.dp),
+                            .padding(12.dp),
                         contentAlignment = Alignment.Center
                     ) {
                         Column(
@@ -386,7 +403,7 @@ fun FileManagerScreen() {
                                 .fillMaxSize()
                                 .clip(RoundedCornerShape(16.dp))
                                 .background(Color(0xFF1C1C1E))
-                                .padding(12.dp),
+                                .padding(10.dp),
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             Row(
@@ -394,7 +411,7 @@ fun FileManagerScreen() {
                                 horizontalArrangement = Arrangement.SpaceBetween,
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
-                                Text("📊 Storage Info", color = Color(0xFFFFB300), fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                                Text("📊 Detailed Storage", color = Color(0xFFFFB300), fontSize = 12.sp, fontWeight = FontWeight.Bold)
                                 Box(
                                     modifier = Modifier
                                         .size(22.dp)
@@ -407,28 +424,71 @@ fun FileManagerScreen() {
                                 }
                             }
 
-                            Spacer(modifier = Modifier.height(8.dp))
+                            Spacer(modifier = Modifier.height(4.dp))
 
                             LazyColumn(
                                 modifier = Modifier.weight(1f),
-                                horizontalAlignment = Alignment.CenterHorizontally
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.spacedBy(4.dp)
                             ) {
                                 item {
-                                    Text("Internal Storage", color = Color.White, fontSize = 12.sp, fontWeight = FontWeight.Bold)
-                                    Text("${storageInfo.first} Used / ${storageInfo.second} Total", color = Color.LightGray, fontSize = 10.sp, modifier = Modifier.padding(bottom = 6.dp))
+                                    Text("Internal Storage", color = Color.White, fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                                    Text("${storageInfo.first} Used / ${storageInfo.second} Total", color = Color.LightGray, fontSize = 9.5.sp)
                                 }
+
+                                // 📄 PDF Category
                                 item {
-                                    Column(
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .clip(RoundedCornerShape(10.dp))
-                                            .background(Color(0xFF2C2C2E))
-                                            .padding(8.dp)
-                                    ) {
-                                        Text("📂 Root: /sdcard", color = Color.LightGray, fontSize = 9.sp)
-                                        Text("📄 File Types: PDF, Text, Audio, Images", color = Color.LightGray, fontSize = 9.sp)
-                                        Text("⚡ Free Space Available", color = Color(0xFF00E676), fontSize = 9.sp, fontWeight = FontWeight.Bold)
-                                    }
+                                    StorageCategoryRow(
+                                        icon = "📄",
+                                        title = "PDF Documents",
+                                        count = categoryStats.pdfCount,
+                                        bytes = categoryStats.pdfBytes,
+                                        color = Color(0xFFD50000)
+                                    )
+                                }
+
+                                // 🖼️ Images / Pics Category
+                                item {
+                                    StorageCategoryRow(
+                                        icon = "🖼️",
+                                        title = "Images & Photos",
+                                        count = categoryStats.imageCount,
+                                        bytes = categoryStats.imageBytes,
+                                        color = Color(0xFF0288D1)
+                                    )
+                                }
+
+                                // 🎵 Audio / Music Category
+                                item {
+                                    StorageCategoryRow(
+                                        icon = "🎵",
+                                        title = "Audio & Music",
+                                        count = categoryStats.audioCount,
+                                        bytes = categoryStats.audioBytes,
+                                        color = Color(0xFF00E676)
+                                    )
+                                }
+
+                                // 🎥 Videos Category
+                                item {
+                                    StorageCategoryRow(
+                                        icon = "🎥",
+                                        title = "Videos & Clips",
+                                        count = categoryStats.videoCount,
+                                        bytes = categoryStats.videoBytes,
+                                        color = Color(0xFFFF9800)
+                                    )
+                                }
+
+                                // 📁 Other Files Category
+                                item {
+                                    StorageCategoryRow(
+                                        icon = "📁",
+                                        title = "Other & System Files",
+                                        count = categoryStats.otherCount,
+                                        bytes = categoryStats.otherBytes,
+                                        color = Color(0xFFAB47BC)
+                                    )
                                 }
                             }
                         }
@@ -489,8 +549,8 @@ fun FileManagerScreen() {
                                             .padding(8.dp),
                                         horizontalAlignment = Alignment.CenterHorizontally
                                     ) {
-                                        Text("• Internal Storage Directory Browser", color = Color.LightGray, fontSize = 9.sp)
-                                        Text("• Native Text, Image & Audio Players", color = Color.LightGray, fontSize = 9.sp)
+                                        Text("• Detailed PDF, Pic, Vid, Music Breakdown", color = Color.LightGray, fontSize = 9.sp)
+                                        Text("• Native Text, Image & Audio Viewers", color = Color.LightGray, fontSize = 9.sp)
                                         Text("• Direct PDF Viewer Integration", color = Color.LightGray, fontSize = 9.sp)
                                         Text("• Target: Samsung Galaxy Watch 6", color = Color(0xFFFFB300), fontSize = 9.sp, fontWeight = FontWeight.Bold)
                                     }
@@ -501,6 +561,29 @@ fun FileManagerScreen() {
                 }
             }
         }
+    }
+}
+
+@Composable
+fun StorageCategoryRow(icon: String, title: String, count: Int, bytes: Long, color: Color) {
+    val formattedSize = formatByteSize(bytes)
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(8.dp))
+            .background(Color(0xFF2C2C2E))
+            .padding(horizontal = 8.dp, vertical = 5.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.weight(1f)) {
+            Text(icon, fontSize = 12.sp, modifier = Modifier.padding(end = 6.dp))
+            Column {
+                Text(title, color = Color.White, fontSize = 9.5.sp, fontWeight = FontWeight.Bold)
+                Text("$count files", color = Color.Gray, fontSize = 8.sp)
+            }
+        }
+        Text(formattedSize, color = color, fontSize = 9.5.sp, fontWeight = FontWeight.Bold)
     }
 }
 
@@ -520,6 +603,54 @@ fun BezelPill(text: String, selected: Boolean, onClick: () -> Unit) {
             fontWeight = FontWeight.Bold
         )
     }
+}
+
+private fun formatByteSize(bytes: Long): String {
+    val mb = bytes / (1024.0 * 1024.0)
+    return if (mb > 1024) String.format(Locale.US, "%.1f GB", mb / 1024.0) else String.format(Locale.US, "%.1f MB", mb)
+}
+
+private fun calculateCategoryStats(root: File): CategoryStorageStats {
+    var pdfC = 0; var pdfB = 0L
+    var imgC = 0; var imgB = 0L
+    var vidC = 0; var vidB = 0L
+    var audC = 0; var audB = 0L
+    var othC = 0; var othB = 0L
+
+    fun scan(dir: File, depth: Int) {
+        if (depth > 3) return
+        val files = dir.listFiles() ?: return
+        for (f in files) {
+            if (f.name.startsWith(".")) continue
+            if (f.isDirectory) {
+                scan(f, depth + 1)
+            } else {
+                val len = f.length()
+                val ext = f.extension.lowercase(Locale.US)
+                when {
+                    ext == "pdf" -> { pdfC++; pdfB += len }
+                    ext in listOf("png", "jpg", "jpeg", "webp", "bmp", "gif") -> { imgC++; imgB += len }
+                    ext in listOf("mp4", "mkv", "webm", "avi", "3gp", "mov") -> { vidC++; vidB += len }
+                    ext in listOf("mp3", "wav", "m4a", "ogg", "aac", "flac") -> { audC++; audB += len }
+                    else -> { othC++; othB += len }
+                }
+            }
+        }
+    }
+
+    try {
+        scan(root, 0)
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+
+    return CategoryStorageStats(
+        pdfCount = pdfC, pdfBytes = pdfB,
+        imageCount = imgC, imageBytes = imgB,
+        videoCount = vidC, videoBytes = vidB,
+        audioCount = audC, audioBytes = audB,
+        otherCount = othC, otherBytes = othB
+    )
 }
 
 private fun getStorageStats(): Pair<String, String> {
