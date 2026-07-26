@@ -11,6 +11,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -19,10 +20,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.FileProvider
+import androidx.wear.compose.foundation.CurvedLayout
+import androidx.wear.compose.foundation.curvedComposable
 import androidx.wear.compose.material.Text
 import com.example.wearfilemanager.model.FileItem
 import java.io.File
@@ -42,6 +46,9 @@ fun FileManagerScreen() {
     var selectedFileItem by remember { mutableStateOf<FileItem?>(null) }
     var activeViewer by remember { mutableStateOf<ActiveViewer>(ActiveViewer.None) }
     var refreshKey by remember { mutableStateOf(0) }
+
+    var showStorageDialog by remember { mutableStateOf(false) }
+    var showAboutDialog by remember { mutableStateOf(false) }
 
     // Read Directory items
     val fileItems by remember(currentDir, refreshKey) {
@@ -63,7 +70,6 @@ fun FileManagerScreen() {
         val ext = file.extension.lowercase(Locale.US)
 
         when {
-            // PDF -> Open Wear PDF Reader directly with URI
             ext == "pdf" -> {
                 try {
                     val uri: Uri = FileProvider.getUriForFile(context, "com.example.wearfilemanager.fileprovider", file)
@@ -85,19 +91,15 @@ fun FileManagerScreen() {
                     }
                 }
             }
-            // Audio Files -> Native Audio Player
             ext in listOf("mp3", "wav", "m4a", "ogg", "aac", "flac") -> {
                 activeViewer = ActiveViewer.AudioViewer(file)
             }
-            // Text / Log / Code Files -> Open Native Text Viewer
             ext in listOf("txt", "log", "json", "csv", "xml", "html", "md", "py", "sh", "properties", "conf", "gradle", "kts") -> {
                 activeViewer = ActiveViewer.TextViewer(file)
             }
-            // Images -> Open Native Image Viewer
             ext in listOf("png", "jpg", "jpeg", "bmp", "webp", "gif") -> {
                 activeViewer = ActiveViewer.ImageViewer(file)
             }
-            // Other file types -> System FileProvider Intent
             else -> {
                 try {
                     val mime = MimeTypeMap.getSingleton().getMimeTypeFromExtension(ext) ?: "*/*"
@@ -134,13 +136,13 @@ fun FileManagerScreen() {
                 LazyColumn(
                     modifier = Modifier.fillMaxSize(),
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    contentPadding = PaddingValues(vertical = 24.dp)
+                    contentPadding = PaddingValues(top = 28.dp, bottom = 24.dp)
                 ) {
                     item {
                         Text(
-                            text = "Watch File Manager",
+                            text = "📁 Watch File Manager",
                             color = Color.White,
-                            fontSize = 15.sp,
+                            fontSize = 14.sp,
                             fontWeight = FontWeight.Bold,
                             modifier = Modifier.padding(bottom = 2.dp)
                         )
@@ -154,13 +156,14 @@ fun FileManagerScreen() {
                                 .padding(bottom = 8.dp)
                                 .clip(RoundedCornerShape(14.dp))
                                 .background(Color(0xFF1C1C1E))
+                                .clickable { showStorageDialog = true }
                                 .padding(8.dp),
                             contentAlignment = Alignment.Center
                         ) {
                             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                                 Text(
-                                    text = "Storage: ${storageInfo.first} / ${storageInfo.second}",
-                                    color = Color(0xFF81D4FA),
+                                    text = "Storage: ${storageInfo.first} used / ${storageInfo.second}",
+                                    color = Color(0xFFFFB300),
                                     fontSize = 10.sp,
                                     fontWeight = FontWeight.Medium
                                 )
@@ -250,6 +253,28 @@ fun FileManagerScreen() {
                     }
                 }
 
+                // Curved Bezel Top Navigation Bar
+                CurvedLayout(
+                    anchor = 270f,
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    curvedComposable {
+                        BezelPill("📁 Files", selected = true) { currentDir = Environment.getExternalStorageDirectory() }
+                    }
+                    curvedComposable {
+                        Spacer(modifier = Modifier.width(3.dp))
+                    }
+                    curvedComposable {
+                        BezelPill("📊 Storage", selected = false) { showStorageDialog = true }
+                    }
+                    curvedComposable {
+                        Spacer(modifier = Modifier.width(3.dp))
+                    }
+                    curvedComposable {
+                        BezelPill("⚙️ About", selected = false) { showAboutDialog = true }
+                    }
+                }
+
                 // File Action Modal Dialog
                 selectedFileItem?.let { fileItem ->
                     Box(
@@ -287,7 +312,6 @@ fun FileManagerScreen() {
 
                                 Spacer(modifier = Modifier.height(12.dp))
 
-                                // Open Button
                                 Box(
                                     modifier = Modifier
                                         .fillMaxWidth()
@@ -309,7 +333,6 @@ fun FileManagerScreen() {
                                     modifier = Modifier.fillMaxWidth(),
                                     horizontalArrangement = Arrangement.SpaceEvenly
                                 ) {
-                                    // Delete Button
                                     Box(
                                         modifier = Modifier
                                             .weight(1f)
@@ -331,7 +354,6 @@ fun FileManagerScreen() {
                                         Text("🗑️ Delete", color = Color.White, fontSize = 11.sp, fontWeight = FontWeight.Bold)
                                     }
 
-                                    // Close Button
                                     Box(
                                         modifier = Modifier
                                             .weight(1f)
@@ -349,8 +371,154 @@ fun FileManagerScreen() {
                         }
                     }
                 }
+
+                // Storage Info Modal Dialog
+                if (showStorageDialog) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(Color(0xF0000000))
+                            .padding(14.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .clip(RoundedCornerShape(16.dp))
+                                .background(Color(0xFF1C1C1E))
+                                .padding(12.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Text("📊 Storage Info", color = Color(0xFFFFB300), fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                                Box(
+                                    modifier = Modifier
+                                        .size(22.dp)
+                                        .clip(CircleShape)
+                                        .background(Color(0xFF333336))
+                                        .clickable { showStorageDialog = false },
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Text("✕", color = Color.White, fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                                }
+                            }
+
+                            Spacer(modifier = Modifier.height(8.dp))
+
+                            LazyColumn(
+                                modifier = Modifier.weight(1f),
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                item {
+                                    Text("Internal Storage", color = Color.White, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                                    Text("${storageInfo.first} Used / ${storageInfo.second} Total", color = Color.LightGray, fontSize = 10.sp, modifier = Modifier.padding(bottom = 6.dp))
+                                }
+                                item {
+                                    Column(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .clip(RoundedCornerShape(10.dp))
+                                            .background(Color(0xFF2C2C2E))
+                                            .padding(8.dp)
+                                    ) {
+                                        Text("📂 Root: /sdcard", color = Color.LightGray, fontSize = 9.sp)
+                                        Text("📄 File Types: PDF, Text, Audio, Images", color = Color.LightGray, fontSize = 9.sp)
+                                        Text("⚡ Free Space Available", color = Color(0xFF00E676), fontSize = 9.sp, fontWeight = FontWeight.Bold)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // About App Modal Dialog
+                if (showAboutDialog) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(Color(0xF0000000))
+                            .padding(14.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .clip(RoundedCornerShape(16.dp))
+                                .background(Color(0xFF1C1C1E))
+                                .padding(12.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Text("⚙️ About App", color = Color(0xFFFFB300), fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                                Box(
+                                    modifier = Modifier
+                                        .size(22.dp)
+                                        .clip(CircleShape)
+                                        .background(Color(0xFF333336))
+                                        .clickable { showAboutDialog = false },
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Text("✕", color = Color.White, fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                                }
+                            }
+
+                            Spacer(modifier = Modifier.height(8.dp))
+
+                            LazyColumn(
+                                modifier = Modifier.weight(1f),
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                item {
+                                    Text("📁 Wear OS File Manager v1.2.0", color = Color.White, fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                                    Text("By Aju George", color = Color.Gray, fontSize = 10.sp, modifier = Modifier.padding(bottom = 6.dp))
+                                }
+                                item {
+                                    Column(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .clip(RoundedCornerShape(10.dp))
+                                            .background(Color(0xFF2C2C2E))
+                                            .padding(8.dp),
+                                        horizontalAlignment = Alignment.CenterHorizontally
+                                    ) {
+                                        Text("• Internal Storage Directory Browser", color = Color.LightGray, fontSize = 9.sp)
+                                        Text("• Native Text, Image & Audio Players", color = Color.LightGray, fontSize = 9.sp)
+                                        Text("• Direct PDF Viewer Integration", color = Color.LightGray, fontSize = 9.sp)
+                                        Text("• Target: Samsung Galaxy Watch 6", color = Color(0xFFFFB300), fontSize = 9.sp, fontWeight = FontWeight.Bold)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
+    }
+}
+
+@Composable
+fun BezelPill(text: String, selected: Boolean, onClick: () -> Unit) {
+    Box(
+        modifier = Modifier
+            .clip(RoundedCornerShape(8.dp))
+            .background(if (selected) Color(0xFFFFB300) else Color(0xFF2C2C2E))
+            .clickable { onClick() }
+            .padding(horizontal = 6.dp, vertical = 2.dp)
+    ) {
+        Text(
+            text = text,
+            color = if (selected) Color.Black else Color.Gray,
+            fontSize = 8.sp,
+            fontWeight = FontWeight.Bold
+        )
     }
 }
 
