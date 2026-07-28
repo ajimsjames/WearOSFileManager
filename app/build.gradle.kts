@@ -11,8 +11,8 @@ android {
         applicationId = "com.ajimsjames.wearfilemanager"
         minSdk = 30
         targetSdk = 33
-        versionCode = 5
-        versionName = "2.3.0"
+        versionCode = 6
+        versionName = "2.3.1"
 
         vectorDrawables {
             useSupportLibrary = true
