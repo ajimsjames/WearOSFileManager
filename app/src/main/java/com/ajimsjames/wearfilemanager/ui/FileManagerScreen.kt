@@ -153,7 +153,7 @@ fun FileManagerScreen() {
                 LazyColumn(
                     modifier = Modifier.fillMaxSize(),
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    contentPadding = PaddingValues(top = 40.dp, bottom = 24.dp)
+                    contentPadding = PaddingValues(top = 52.dp, bottom = 24.dp)
                 ) {
                     item {
                         Text(
@@ -165,7 +165,7 @@ fun FileManagerScreen() {
                         )
                     }
 
-                    // Storage Indicator Card
+                    // Directory Location Card
                     item {
                         Box(
                             modifier = Modifier
@@ -173,22 +173,15 @@ fun FileManagerScreen() {
                                 .padding(bottom = 8.dp)
                                 .clip(RoundedCornerShape(14.dp))
                                 .background(Color(0xFF1C1C1E))
-                                .clickable { showStorageDialog = true }
                                 .padding(8.dp),
                             contentAlignment = Alignment.Center
                         ) {
                             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                                 Text(
-                                    text = "Storage: ${storageInfo.first} used / ${storageInfo.second}",
+                                    text = "📍 " + (currentDir.absolutePath.replace("/storage/emulated/0", "Internal Storage")),
                                     color = Color(0xFFFFB300),
-                                    fontSize = 10.sp,
-                                    fontWeight = FontWeight.Medium
-                                )
-                                Spacer(modifier = Modifier.height(4.dp))
-                                Text(
-                                    text = currentDir.name.ifEmpty { "/sdcard" },
-                                    color = Color.Gray,
-                                    fontSize = 10.sp,
+                                    fontSize = 9.sp,
+                                    fontWeight = FontWeight.Bold,
                                     maxLines = 1,
                                     overflow = TextOverflow.Ellipsis
                                 )

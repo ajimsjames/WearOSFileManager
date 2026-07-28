@@ -27506,7 +27506,6 @@ androidx.compose.foundation.gestures.ContentInViewNode$launchAnimation$2$1$1:
     public static androidx.compose.ui.node.TraversableNode$Companion$TraverseDescendantsAction invoke$1()
     public static void invoke$12()
     public static void invoke$13()
-    public static void invoke$14()
     public static java.lang.Boolean invoke$5()
 androidx.compose.foundation.gestures.ContentInViewNode$launchAnimation$2$1$2
 androidx.compose.foundation.gestures.ContentInViewNode$launchAnimation$2$1:
@@ -27571,7 +27570,7 @@ androidx.compose.foundation.gestures.DragGestureDetectorKt:
     public static final java.lang.Object awaitLongPressOrCancellation-rnUCldI(long,androidx.compose.ui.input.pointer.SuspendingPointerInputModifierNodeImpl$PointerEventHandlerCoroutine,kotlin.coroutines.Continuation)
     public static final java.lang.Object drag-jO51t88(androidx.compose.ui.input.pointer.SuspendingPointerInputModifierNodeImpl$PointerEventHandlerCoroutine,long,androidx.collection.ScatterSet$toString$1,kotlin.coroutines.Continuation)
 androidx.compose.foundation.gestures.DraggableKt$awaitDownAndSlop$postPointerSlop$1:
-    public static void invoke$15()
+    public static void invoke$14()
     public static androidx.compose.ui.layout.MeasureResult invoke-0kLqBqw()
     public static void invoke-Uv8p0NA()
 androidx.compose.foundation.gestures.DraggableKt$awaitDrag$2:
@@ -27672,7 +27671,7 @@ androidx.compose.foundation.gestures.ScrollableState:
     public static synthetic java.lang.Object scroll$default(androidx.compose.foundation.gestures.ScrollableState,kotlin.jvm.functions.Function2,kotlin.coroutines.Continuation)
 androidx.compose.foundation.gestures.ScrollableStateKt
 androidx.compose.foundation.gestures.ScrollingLogic$dispatchScroll$performScroll$1:
-    public static void invoke$16()
+    public static void invoke$15()
     public final long invoke-MK-Hz9U()
 androidx.compose.foundation.gestures.ScrollingLogic$doFlingAnimation$2$outerScopeScroll$1
 androidx.compose.foundation.gestures.ScrollingLogic$doFlingAnimation$2:
@@ -28029,7 +28028,7 @@ androidx.compose.foundation.lazy.LazyListIntervalContent$item$1:
     public final java.lang.Object invoke$8()
 androidx.compose.foundation.lazy.LazyListIntervalContent$item$2
 androidx.compose.foundation.lazy.LazyListIntervalContent$item$3:
-    public final void invoke$17()
+    public final void invoke$16()
     public static android.graphics.Typeface invoke-DPcqOEQ()
 androidx.compose.foundation.lazy.LazyListIntervalContent:
     public static final int $stable
@@ -28322,7 +28321,7 @@ androidx.compose.foundation.lazy.layout.LazyLayoutKeyIndexMap:
 androidx.compose.foundation.lazy.layout.LazyLayoutKt$LazyLayout$3$2$1
 androidx.compose.foundation.lazy.layout.LazyLayoutKt$LazyLayout$3$itemContentFactory$1$1
 androidx.compose.foundation.lazy.layout.LazyLayoutKt$LazyLayout$3:
-    public static void invoke$18()
+    public static void invoke$17()
 androidx.compose.foundation.lazy.layout.LazyLayoutKt
 androidx.compose.foundation.lazy.layout.LazyLayoutMeasureScope:
     public abstract java.util.List measure-0kLqBqw()
@@ -28428,7 +28427,7 @@ androidx.compose.foundation.lazy.layout.MutableIntervalList:
     public static androidx.compose.foundation.lazy.layout.IntervalList$Interval getIntervalForIndex()
     public final int getSize()
 androidx.compose.foundation.lazy.layout.NearestRangeKeyIndexMap$2$1:
-    public static void invoke$19()
+    public static void invoke$18()
 androidx.compose.foundation.lazy.layout.NearestRangeKeyIndexMap:
     public static final int $stable
     static void <clinit>()
@@ -28490,9 +28489,9 @@ androidx.compose.foundation.text.AnnotatedStringResolveInlineContentKt$InlineChi
 androidx.compose.foundation.text.AnnotatedStringResolveInlineContentKt$InlineChildren$2
 androidx.compose.foundation.text.BasicTextKt$BasicText$3$1:
     public static com.ajimsjames.wearfilemanager.ui.ImageCanvasView invoke()
+    public final void invoke$19()
     public final void invoke$20()
-    public final void invoke$21()
-    public static void invoke$22()
+    public static void invoke$21()
 androidx.compose.foundation.text.BasicTextKt$BasicText$4$1:
     public static java.util.List invoke$1()
 androidx.compose.foundation.text.BasicTextKt$BasicText$5:
@@ -28625,7 +28624,7 @@ androidx.compose.foundation.text.selection.SelectionGesturesKt
 androidx.compose.foundation.text.selection.SelectionRegistrar
 androidx.compose.foundation.text.selection.SelectionRegistrarKt$LocalSelectionRegistrar$1:
     public static androidx.compose.foundation.text.selection.TextSelectionColors invoke()
-    public static void invoke$23()
+    public static void invoke$22()
     private static synthetic bridge java.lang.Object invoke$androidx$compose$foundation$text$selection$SelectionRegistrarKt$LocalSelectionRegistrar$1()
 androidx.compose.foundation.text.selection.SelectionRegistrarKt:
     public static final boolean hasSelection(long)
@@ -30211,7 +30210,7 @@ androidx.compose.runtime.snapshots.SnapshotIdSet:
     public static int lowest()
 androidx.compose.runtime.snapshots.SnapshotIdSetKt
 androidx.compose.runtime.snapshots.SnapshotKt$advanceGlobalSnapshot$3:
-    public static void invoke$24()
+    public static void invoke$23()
 androidx.compose.runtime.snapshots.SnapshotKt$emptyLambda$1
 androidx.compose.runtime.snapshots.SnapshotKt$mergedReadObserver$1
 androidx.compose.runtime.snapshots.SnapshotKt$mergedWriteObserver$1
@@ -32032,7 +32031,7 @@ androidx.compose.ui.input.pointer.PointerInteropFilter:
     public static void setOnTouchEvent()
     public static void setRequestDisallowInterceptTouchEvent()
 androidx.compose.ui.input.pointer.PointerInteropFilter_androidKt$pointerInteropFilter$3:
-    public final void invoke$25()
+    public final void invoke$24()
     public static java.lang.Boolean invoke$9()
 androidx.compose.ui.input.pointer.PointerInteropFilter_androidKt
 androidx.compose.ui.input.pointer.PointerInteropUtils_androidKt
@@ -32061,7 +32060,7 @@ androidx.compose.ui.input.pointer.ProcessResult
 androidx.compose.ui.input.pointer.RequestDisallowInterceptTouchEvent:
     public static final int $stable
     static void <clinit>()
-    public static void invoke$26()
+    public static void invoke$25()
     public static void setPointerInteropFilter$ui_release()
 androidx.compose.ui.input.pointer.SuspendPointerInputElement:
     static void <clinit>()
@@ -32309,9 +32308,9 @@ androidx.compose.ui.layout.SubcomposeLayoutKt$SubcomposeLayout$5
 androidx.compose.ui.layout.SubcomposeLayoutKt:
     public static final synthetic androidx.compose.ui.graphics.StrokeJoin$Companion access$getReusedSlotId$p()
 androidx.compose.ui.layout.SubcomposeLayoutState$setCompositionContext$1:
+    public static void invoke$26()
     public static void invoke$27()
     public static void invoke$28()
-    public static void invoke$29()
 androidx.compose.ui.layout.SubcomposeLayoutState$setMeasurePolicy$1
 androidx.compose.ui.layout.SubcomposeLayoutState$setRoot$1
 androidx.compose.ui.layout.SubcomposeLayoutState:
@@ -32405,7 +32404,7 @@ androidx.compose.ui.node.BackwardsCompatNodeKt$onDrawCacheReadsChanged$1:
     public static final androidx.compose.ui.node.BackwardsCompatNodeKt$onDrawCacheReadsChanged$1 INSTANCE
     public final java.lang.Boolean invoke(java.lang.Object)
     public final void invoke(androidx.compose.ui.node.BackwardsCompatNode)
-    public static void invoke$30()
+    public static void invoke$29()
 androidx.compose.ui.node.BackwardsCompatNodeKt$updateModifierLocalConsumer$1
 androidx.compose.ui.node.BackwardsCompatNodeKt:
     public static final androidx.compose.ui.node.BackwardsCompatNodeKt$DetachedModifierLocalReadScope$1 DetachedModifierLocalReadScope
@@ -32423,13 +32422,13 @@ androidx.compose.ui.node.ComposeUiNode$Companion$SetCompositeKeyHash$1:
     public static final androidx.compose.ui.node.ComposeUiNode$Companion$SetCompositeKeyHash$1 INSTANCE$1
     public static final androidx.compose.ui.node.ComposeUiNode$Companion$SetCompositeKeyHash$1 INSTANCE$2
     public static final androidx.compose.ui.node.ComposeUiNode$Companion$SetCompositeKeyHash$1 INSTANCE$6
+    public static void invoke$30()
     public static void invoke$31()
     public static void invoke$32()
     public static void invoke$33()
     public static void invoke$34()
     public static void invoke$35()
     public static void invoke$36()
-    public static void invoke$37()
 androidx.compose.ui.node.ComposeUiNode$Companion$SetDensity$1
 androidx.compose.ui.node.ComposeUiNode$Companion$SetLayoutDirection$1
 androidx.compose.ui.node.ComposeUiNode$Companion$SetMeasurePolicy$1
@@ -32539,7 +32538,7 @@ androidx.compose.ui.node.LayerPositionalProperties:
     public static void copyFrom()
     public static void copyFrom$1()
     public static boolean hasSameValuesAs()
-androidx.compose.ui.node.LayoutModifierNodeCoordinator$$InternalSyntheticThrowCCEIfNotNull$233$03a6d961604b374ac0910d8983169a94be5d99ff45e5f28c8ed4f17fe6443148$0
+androidx.compose.ui.node.LayoutModifierNodeCoordinator$$InternalSyntheticThrowCCEIfNotNull$230$03a6d961604b374ac0910d8983169a94be5d99ff45e5f28c8ed4f17fe6443148$0
 androidx.compose.ui.node.LayoutModifierNodeCoordinator$Companion
 androidx.compose.ui.node.LayoutModifierNodeCoordinator$LookaheadDelegateForLayoutModifierNode
 androidx.compose.ui.node.LayoutModifierNodeCoordinator:
@@ -33163,7 +33162,7 @@ androidx.compose.ui.platform.AndroidComposeView$addAndroidView$1$onInitializeAcc
     public final java.lang.Boolean invoke(java.lang.Object)
     public final void invoke$1()
     public static java.lang.Boolean invoke$10()
-    public final void invoke$21()
+    public final void invoke$20()
 androidx.compose.ui.platform.AndroidComposeView$configurationChangeObserver$1
 androidx.compose.ui.platform.AndroidComposeView$dragAndDropModifierOnDragListener$1$$InternalSyntheticThrowCCEIfNotNull$17$e1674ab5d5cfc48cae10ec0c3fa51760263bb2d4fff2db7ca3c3645f45f39480$0
 androidx.compose.ui.platform.AndroidComposeView$dragAndDropModifierOnDragListener$1
@@ -33252,7 +33251,7 @@ androidx.compose.ui.platform.AndroidComposeViewAccessibilityDelegateCompat$Trans
 androidx.compose.ui.platform.AndroidComposeViewAccessibilityDelegateCompat$WhenMappings
 androidx.compose.ui.platform.AndroidComposeViewAccessibilityDelegateCompat$onSendAccessibilityEvent$1:
     public static java.lang.Boolean invoke$11()
-    public static void invoke$38()
+    public static void invoke$37()
 androidx.compose.ui.platform.AndroidComposeViewAccessibilityDelegateCompat$scheduleScrollEventIfNeeded$1
 androidx.compose.ui.platform.AndroidComposeViewAccessibilityDelegateCompat$scheduleScrollEventIfNeededLambda$1
 androidx.compose.ui.platform.AndroidComposeViewAccessibilityDelegateCompat$semanticComparator$$inlined$thenBy$1:
@@ -33262,8 +33261,8 @@ androidx.compose.ui.platform.AndroidComposeViewAccessibilityDelegateCompat$sendS
 androidx.compose.ui.platform.AndroidComposeViewAccessibilityDelegateCompat$sendSubtreeChangeAccessibilityEvents$semanticsNode$1
 androidx.compose.ui.platform.AndroidComposeViewAccessibilityDelegateCompat$sortByGeometryGroupings$2:
     public final void invoke(androidx.compose.runtime.Composer,int)
+    public static void invoke$38()
     public static void invoke$39()
-    public static void invoke$40()
     public static java.lang.Integer invoke$5()
 androidx.compose.ui.platform.AndroidComposeViewAccessibilityDelegateCompat:
     public static final int $stable
@@ -34767,7 +34766,7 @@ androidx.compose.ui.text.input.CursorAnchorInfoController$textFieldToRootTransfo
     public static final androidx.compose.ui.text.input.CursorAnchorInfoController$textFieldToRootTransform$1 INSTANCE
     public static final androidx.compose.ui.text.input.CursorAnchorInfoController$textFieldToRootTransform$1 INSTANCE$1
     public static androidx.compose.ui.text.input.TextFieldValue invoke()
-    public final void invoke$20()
+    public final void invoke$19()
     public static void invoke-58bKbWc()
     public static void invoke-KlQnJC8()
 androidx.compose.ui.text.input.CursorAnchorInfoController
@@ -35317,8 +35316,8 @@ androidx.compose.ui.viewinterop.AndroidViewHolder$Companion$OnCommitAffectingUpd
 androidx.compose.ui.viewinterop.AndroidViewHolder$Companion$OnCommitAffectingUpdate$1:
     public final void invoke(androidx.compose.ui.layout.Placeable$PlacementScope)
     public final void invoke$4()
+    public static void invoke$40()
     public static void invoke$41()
-    public static void invoke$42()
 androidx.compose.ui.viewinterop.AndroidViewHolder$Companion
 androidx.compose.ui.viewinterop.AndroidViewHolder$layoutNode$1$1
 androidx.compose.ui.viewinterop.AndroidViewHolder$layoutNode$1$2:
@@ -35326,11 +35325,11 @@ androidx.compose.ui.viewinterop.AndroidViewHolder$layoutNode$1$2:
     public final void invoke(java.lang.Throwable)
     public static java.lang.CharSequence invoke$2()
     public static java.lang.String invoke$2()
-    public static void invoke$43()
+    public static void invoke$42()
 androidx.compose.ui.viewinterop.AndroidViewHolder$layoutNode$1$3:
     public final void invoke(androidx.compose.ui.layout.LayoutCoordinates)
     public final void invoke(androidx.compose.ui.layout.Placeable$PlacementScope)
-    public final void invoke$25()
+    public final void invoke$24()
 androidx.compose.ui.viewinterop.AndroidViewHolder$layoutNode$1$4
 androidx.compose.ui.viewinterop.AndroidViewHolder$layoutNode$1$5$measure$1
 androidx.compose.ui.viewinterop.AndroidViewHolder$layoutNode$1$5$measure$2
@@ -35366,11 +35365,11 @@ androidx.compose.ui.viewinterop.AndroidView_androidKt$AndroidView$$inlined$Compo
 androidx.compose.ui.viewinterop.AndroidView_androidKt$AndroidView$$inlined$ReusableComposeNode$1
 androidx.compose.ui.viewinterop.AndroidView_androidKt$AndroidView$1
 androidx.compose.ui.viewinterop.AndroidView_androidKt$AndroidView$2$1:
+    public static void invoke$43()
     public static void invoke$44()
     public static void invoke$45()
     public static void invoke$46()
     public static void invoke$47()
-    public static void invoke$48()
 androidx.compose.ui.viewinterop.AndroidView_androidKt$AndroidView$2$2
 androidx.compose.ui.viewinterop.AndroidView_androidKt$AndroidView$2$3
 androidx.compose.ui.viewinterop.AndroidView_androidKt$AndroidView$3$1
@@ -35612,7 +35611,7 @@ androidx.core.os.LocaleListCompat:
     public static java.util.Locale get()
     public static java.lang.Object unwrap()
     public static androidx.core.os.LocaleListCompat wrap(android.os.LocaleList)
-androidx.core.os.LocaleListCompatWrapper$$InternalSyntheticThrowCCEIfNotNull$261$eabde584e09f5dbef5e5c77b987ffae1119ec566c4556bde1e78e256d6ae9d7b$0
+androidx.core.os.LocaleListCompatWrapper$$InternalSyntheticThrowCCEIfNotNull$258$eabde584e09f5dbef5e5c77b987ffae1119ec566c4556bde1e78e256d6ae9d7b$0
 androidx.core.os.LocaleListCompatWrapper
 androidx.core.os.LocaleListInterface
 androidx.core.os.LocaleListPlatformWrapper:
@@ -36624,8 +36623,7 @@ androidx.wear.compose.material.ProgressIndicatorKt$CircularProgressIndicator$sta
 androidx.wear.compose.material.ProgressIndicatorKt
 androidx.wear.compose.material.ProvidersKt$provideScopeContent$2$1
 androidx.wear.compose.material.ProvidersKt$provideScopeContent$2:
-    public final void invoke(androidx.compose.foundation.lazy.LazyItemScope,androidx.compose.runtime.Composer,int)
-    public static void invoke$49()
+    public static void invoke$48()
 androidx.wear.compose.material.ProvidersKt
 androidx.wear.compose.material.Shapes:
     static void <clinit>()
@@ -36633,11 +36631,11 @@ androidx.wear.compose.material.ShapesKt$LocalShapes$1
 androidx.wear.compose.material.TextKt$LocalTextStyle$1
 androidx.wear.compose.material.TextKt$ProvideTextStyle$1
 androidx.wear.compose.material.TextKt$Text$1:
-    public final void invoke$50()
+    public final void invoke$49()
 androidx.wear.compose.material.TextKt$Text$2:
     public final void invoke(androidx.compose.runtime.Composer,int)
 androidx.wear.compose.material.TextKt$Text$5:
-    public final void invoke$50()
+    public final void invoke$49()
 androidx.wear.compose.material.TextKt$Text$6:
     public final void invoke(androidx.compose.runtime.Composer,int)
 androidx.wear.compose.material.Typography:
@@ -36724,9 +36722,8 @@ com.ajimsjames.wearfilemanager.ui.FileManagerScreenKt$BezelPill$3:
 com.ajimsjames.wearfilemanager.ui.FileManagerScreenKt$FileManagerScreen$1$1
 com.ajimsjames.wearfilemanager.ui.FileManagerScreenKt$FileManagerScreen$2$1
 com.ajimsjames.wearfilemanager.ui.FileManagerScreenKt$FileManagerScreen$3$1
-com.ajimsjames.wearfilemanager.ui.FileManagerScreenKt$FileManagerScreen$4$1$1$1$1$1
-com.ajimsjames.wearfilemanager.ui.FileManagerScreenKt$FileManagerScreen$4$1$1$1
 com.ajimsjames.wearfilemanager.ui.FileManagerScreenKt$FileManagerScreen$4$1$1$2$1$1
+com.ajimsjames.wearfilemanager.ui.FileManagerScreenKt$FileManagerScreen$4$1$1$2
 com.ajimsjames.wearfilemanager.ui.FileManagerScreenKt$FileManagerScreen$4$1$1$3$1
 com.ajimsjames.wearfilemanager.ui.FileManagerScreenKt$FileManagerScreen$4$1$1$invoke$$inlined$items$default$1:
     public static java.lang.Void invoke()
@@ -36734,9 +36731,10 @@ com.ajimsjames.wearfilemanager.ui.FileManagerScreenKt$FileManagerScreen$4$1$1$in
     private static synthetic bridge java.lang.Object invoke$com$ajimsjames$wearfilemanager$ui$FileManagerScreenKt$FileManagerScreen$4$1$1$invoke$$inlined$items$default$1()
 com.ajimsjames.wearfilemanager.ui.FileManagerScreenKt$FileManagerScreen$4$1$1$invoke$$inlined$items$default$3
 com.ajimsjames.wearfilemanager.ui.FileManagerScreenKt$FileManagerScreen$4$1$1$invoke$$inlined$items$default$4:
-    public final void invoke$17()
+    public final void invoke$16()
 com.ajimsjames.wearfilemanager.ui.FileManagerScreenKt$FileManagerScreen$4$1$1:
     public final void invoke(androidx.compose.foundation.lazy.LazyListScope)
+    public static void invoke$50()
 com.ajimsjames.wearfilemanager.ui.FileManagerScreenKt$FileManagerScreen$4$2$1$1$1$1
 com.ajimsjames.wearfilemanager.ui.FileManagerScreenKt$FileManagerScreen$4$2$1$1
 com.ajimsjames.wearfilemanager.ui.FileManagerScreenKt$FileManagerScreen$4$2$1$2$1$1
@@ -38002,7 +38000,7 @@ kotlinx.coroutines.CoroutineExceptionHandler:
     public static final kotlinx.coroutines.CoroutineExceptionHandler$Key Key
     static void <clinit>()
 kotlinx.coroutines.CoroutineExceptionHandlerKt
-kotlinx.coroutines.CoroutineId$$InternalSyntheticThrowCCEIfNotNull$261$a7d8b984f14ef6811fc36f0d030a1c8a7f27075d192601697212118d266ca07a$0
+kotlinx.coroutines.CoroutineId$$InternalSyntheticThrowCCEIfNotNull$258$a7d8b984f14ef6811fc36f0d030a1c8a7f27075d192601697212118d266ca07a$0
 kotlinx.coroutines.CoroutineId$$InternalSyntheticThrowCCEIfNotNull$28$db4fcf294f73e0414b61d779f72a560fad56831e560e6b71def36fecaf64a8d1$0
 kotlinx.coroutines.CoroutineId
 kotlinx.coroutines.CoroutineName$Key
@@ -38632,8 +38630,8 @@ kotlinx.coroutines.internal.StackTraceRecoveryKt:
 kotlinx.coroutines.internal.Symbol
 kotlinx.coroutines.internal.SystemPropsKt
 kotlinx.coroutines.internal.SystemPropsKt__SystemProps_commonKt
-kotlinx.coroutines.internal.ThreadContextKt$countAll$1$$InternalSyntheticThrowCCEIfNotNull$261$0ee3fc021eff07e576417283c3f649d0bfd81e5c7dde16b0af94b2ddc784bfa2$0
-kotlinx.coroutines.internal.ThreadContextKt$countAll$1$$InternalSyntheticThrowCCEIfNotNull$261$0ee3fc021eff07e576417283c3f649d0bfd81e5c7dde16b0af94b2ddc784bfa2$2
+kotlinx.coroutines.internal.ThreadContextKt$countAll$1$$InternalSyntheticThrowCCEIfNotNull$258$0ee3fc021eff07e576417283c3f649d0bfd81e5c7dde16b0af94b2ddc784bfa2$0
+kotlinx.coroutines.internal.ThreadContextKt$countAll$1$$InternalSyntheticThrowCCEIfNotNull$258$0ee3fc021eff07e576417283c3f649d0bfd81e5c7dde16b0af94b2ddc784bfa2$2
 kotlinx.coroutines.internal.ThreadContextKt$countAll$1:
     public static kotlinx.coroutines.internal.ThreadState invoke()
     public static java.lang.Object invoke$39()
