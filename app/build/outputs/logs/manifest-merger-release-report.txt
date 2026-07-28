@@ -172,7 +172,7 @@ ADDED from /home/aju/WearOSFileManager/app/src/main/AndroidManifest.xml:32:13-34
 		ADDED from /home/aju/WearOSFileManager/app/src/main/AndroidManifest.xml:34:17-51
 	android:name
 		ADDED from /home/aju/WearOSFileManager/app/src/main/AndroidManifest.xml:33:17-67
-activity#com.example.wearfilemanager.MainActivity
+activity#com.ajimsjames.wearfilemanager.MainActivity
 ADDED from /home/aju/WearOSFileManager/app/src/main/AndroidManifest.xml:37:9-46:20
 	android:exported
 		ADDED from /home/aju/WearOSFileManager/app/src/main/AndroidManifest.xml:39:13-36
@@ -386,7 +386,7 @@ ADDED from [androidx.core:core:1.12.0] /home/aju/.gradle/caches/transforms-3/afb
 		ADDED from [androidx.core:core:1.12.0] /home/aju/.gradle/caches/transforms-3/afb2f3308bef2898d66a923d88cf829d/transformed/core-1.12.0/AndroidManifest.xml:24:9-44
 	android:name
 		ADDED from [androidx.core:core:1.12.0] /home/aju/.gradle/caches/transforms-3/afb2f3308bef2898d66a923d88cf829d/transformed/core-1.12.0/AndroidManifest.xml:23:9-81
-permission#com.example.wearfilemanager.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+permission#com.ajimsjames.wearfilemanager.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
 ADDED from [androidx.core:core:1.12.0] /home/aju/.gradle/caches/transforms-3/afb2f3308bef2898d66a923d88cf829d/transformed/core-1.12.0/AndroidManifest.xml:22:5-24:47
 	android:protectionLevel
 		ADDED from [androidx.core:core:1.12.0] /home/aju/.gradle/caches/transforms-3/afb2f3308bef2898d66a923d88cf829d/transformed/core-1.12.0/AndroidManifest.xml:24:9-44
@@ -396,7 +396,7 @@ uses-permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
 ADDED from [androidx.core:core:1.12.0] /home/aju/.gradle/caches/transforms-3/afb2f3308bef2898d66a923d88cf829d/transformed/core-1.12.0/AndroidManifest.xml:26:5-97
 	android:name
 		ADDED from [androidx.core:core:1.12.0] /home/aju/.gradle/caches/transforms-3/afb2f3308bef2898d66a923d88cf829d/transformed/core-1.12.0/AndroidManifest.xml:26:22-94
-uses-permission#com.example.wearfilemanager.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+uses-permission#com.ajimsjames.wearfilemanager.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
 ADDED from [androidx.core:core:1.12.0] /home/aju/.gradle/caches/transforms-3/afb2f3308bef2898d66a923d88cf829d/transformed/core-1.12.0/AndroidManifest.xml:26:5-97
 	android:name
 		ADDED from [androidx.core:core:1.12.0] /home/aju/.gradle/caches/transforms-3/afb2f3308bef2898d66a923d88cf829d/transformed/core-1.12.0/AndroidManifest.xml:26:22-94

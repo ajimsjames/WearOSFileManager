@@ -1,4 +1,4 @@
-com.example.wearfilemanager
+com.ajimsjames.wearfilemanager
 attr action
 attr alpha
 attr argType

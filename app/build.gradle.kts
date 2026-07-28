@@ -4,15 +4,15 @@ plugins {
 }
 
 android {
-    namespace = "com.example.wearfilemanager"
+    namespace = "com.ajimsjames.wearfilemanager"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.wearfilemanager"
+        applicationId = "com.ajimsjames.wearfilemanager"
         minSdk = 30
         targetSdk = 33
-        versionCode = 5
-        versionName = "1.4.0"
+        versionCode = 6
+        versionName = "2.0.0"
 
         vectorDrawables {
             useSupportLibrary = true
