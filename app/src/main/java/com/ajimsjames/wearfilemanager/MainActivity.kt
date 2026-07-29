@@ -1,64 +1,104 @@
 package com.ajimsjames.wearfilemanager
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
-import android.provider.Settings
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.wear.compose.material.MaterialTheme
+import androidx.wear.compose.material.Text
 import com.ajimsjames.wearfilemanager.ui.FileManagerScreen
 
 class MainActivity : ComponentActivity() {
+
+    private val isPermissionGranted = mutableStateOf(false)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Request standard/media permissions first to ensure toggles appear in system settings
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            requestPermissions(
-                arrayOf(
-                    android.Manifest.permission.READ_MEDIA_IMAGES,
-                    android.Manifest.permission.READ_MEDIA_VIDEO,
-                    android.Manifest.permission.READ_MEDIA_AUDIO
-                ),
-                101
-            )
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requestPermissions(
-                arrayOf(
-                    android.Manifest.permission.READ_EXTERNAL_STORAGE,
-                    android.Manifest.permission.WRITE_EXTERNAL_STORAGE
-                ),
-                101
-            )
-        }
-
-        // Safe Request Manage External Storage permission on Android 11+
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            try {
-                if (!Environment.isExternalStorageManager()) {
-                    try {
-                        val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION).apply {
-                            data = Uri.parse("package:$packageName")
-                        }
-                        startActivity(intent)
-                    } catch (e: Exception) {
-                        val intent = Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION)
-                        startActivity(intent)
-                    }
-                }
-            } catch (e: Exception) {
-                Log.e("MainActivity", "Failed to open storage settings activity", e)
-            }
-        }
+        checkStoragePermission()
 
         setContent {
             MaterialTheme {
-                FileManagerScreen()
+                val hasPermission by isPermissionGranted
+
+                if (!hasPermission) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(Color.Black)
+                            .padding(16.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Center,
+                            modifier = Modifier.fillMaxSize()
+                        ) {
+                            Text(
+                                text = "🔒 Storage Permission",
+                                color = Color(0xFFFFB300),
+                                fontSize = 13.sp,
+                                fontWeight = FontWeight.Bold,
+                                modifier = Modifier.padding(bottom = 6.dp)
+                            )
+                            Text(
+                                text = "Please open the Companion App on your phone and click 'Grant Files Access' to enable.",
+                                color = Color.White,
+                                fontSize = 10.sp,
+                                textAlign = TextAlign.Center,
+                                modifier = Modifier.padding(bottom = 12.dp)
+                            )
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .clip(RoundedCornerShape(12.dp))
+                                    .background(Color(0xFF2C2C2E))
+                                    .clickable {
+                                        checkStoragePermission()
+                                    }
+                                    .padding(vertical = 8.dp),
+                                contentAlignment = Alignment.Center
+                              ) {
+                                Text(
+                                    text = "🔄 Check Again",
+                                    color = Color.White,
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.Bold
+                                )
+                            }
+                        }
+                    }
+                } else {
+                    FileManagerScreen()
+                }
             }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        checkStoragePermission()
+    }
+
+    private fun checkStoragePermission() {
+        isPermissionGranted.value = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            Environment.isExternalStorageManager()
+        } else {
+            true
         }
     }
 }

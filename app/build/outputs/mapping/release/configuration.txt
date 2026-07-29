@@ -326,21 +326,11 @@
 -keep,allowobfuscation,allowshrinking class * extends androidx.navigation.Navigator
 
 # End of content from /home/aju/.gradle/caches/transforms-3/c84a2167711ccad29b84a03d444c9d91/transformed/navigation-common-2.6.0/proguard.txt
-# The proguard configuration file for the following section is /home/aju/.gradle/caches/transforms-3/687c7b9bed8d5a598fe55456677430b7/transformed/lifecycle-process-2.7.0/proguard.txt
+# The proguard configuration file for the following section is /home/aju/.gradle/caches/transforms-3/f927a42403fc0da313c9b1d380b6199f/transformed/lifecycle-process-2.6.1/proguard.txt
 # this rule is need to work properly when app is compiled with api 28, see b/142778206
 -keepclassmembers class * extends androidx.lifecycle.EmptyActivityLifecycleCallbacks { *; }
-# End of content from /home/aju/.gradle/caches/transforms-3/687c7b9bed8d5a598fe55456677430b7/transformed/lifecycle-process-2.7.0/proguard.txt
-# The proguard configuration file for the following section is /home/aju/.gradle/caches/transforms-3/be99834cd241d387b03c93481074976c/transformed/lifecycle-viewmodel-savedstate-2.7.0/proguard.txt
--keepclassmembers,allowobfuscation class * extends androidx.lifecycle.ViewModel {
-    <init>(androidx.lifecycle.SavedStateHandle);
-}
-
--keepclassmembers,allowobfuscation class * extends androidx.lifecycle.AndroidViewModel {
-    <init>(android.app.Application,androidx.lifecycle.SavedStateHandle);
-}
-
-# End of content from /home/aju/.gradle/caches/transforms-3/be99834cd241d387b03c93481074976c/transformed/lifecycle-viewmodel-savedstate-2.7.0/proguard.txt
-# The proguard configuration file for the following section is /home/aju/.gradle/caches/transforms-3/876bf0a8beb6bbc1a1b7163904ff99a9/transformed/lifecycle-runtime-2.7.0/proguard.txt
+# End of content from /home/aju/.gradle/caches/transforms-3/f927a42403fc0da313c9b1d380b6199f/transformed/lifecycle-process-2.6.1/proguard.txt
+# The proguard configuration file for the following section is /home/aju/.gradle/caches/transforms-3/198fc8cb86e9a87aeffef29a305780e1/transformed/lifecycle-runtime-2.6.1/proguard.txt
 -keepattributes AnnotationDefault,
                 RuntimeVisibleAnnotations,
                 RuntimeVisibleParameterAnnotations,
@@ -348,6 +338,9 @@
 
 -keepclassmembers enum androidx.lifecycle.Lifecycle$Event {
     <fields>;
+}
+
+-keep !interface * implements androidx.lifecycle.LifecycleObserver {
 }
 
 -keep class * implements androidx.lifecycle.GeneratedAdapter {
@@ -361,17 +354,17 @@
 # this rule is need to work properly when app is compiled with api 28, see b/142778206
 # Also this rule prevents registerIn from being inlined.
 -keepclassmembers class androidx.lifecycle.ReportFragment$LifecycleCallbacks { *; }
-# End of content from /home/aju/.gradle/caches/transforms-3/876bf0a8beb6bbc1a1b7163904ff99a9/transformed/lifecycle-runtime-2.7.0/proguard.txt
-# The proguard configuration file for the following section is /home/aju/.gradle/caches/transforms-3/1474bda20ba5581dca0b8466864c5ca2/transformed/lifecycle-viewmodel-2.7.0/proguard.txt
+# End of content from /home/aju/.gradle/caches/transforms-3/198fc8cb86e9a87aeffef29a305780e1/transformed/lifecycle-runtime-2.6.1/proguard.txt
+# The proguard configuration file for the following section is /home/aju/.gradle/caches/transforms-3/ab3c338025437c3bc46eb2cf2f102619/transformed/lifecycle-viewmodel-savedstate-2.6.1/proguard.txt
 -keepclassmembers,allowobfuscation class * extends androidx.lifecycle.ViewModel {
-    <init>();
+    <init>(androidx.lifecycle.SavedStateHandle);
 }
 
 -keepclassmembers,allowobfuscation class * extends androidx.lifecycle.AndroidViewModel {
-    <init>(android.app.Application);
+    <init>(android.app.Application,androidx.lifecycle.SavedStateHandle);
 }
 
-# End of content from /home/aju/.gradle/caches/transforms-3/1474bda20ba5581dca0b8466864c5ca2/transformed/lifecycle-viewmodel-2.7.0/proguard.txt
+# End of content from /home/aju/.gradle/caches/transforms-3/ab3c338025437c3bc46eb2cf2f102619/transformed/lifecycle-viewmodel-savedstate-2.6.1/proguard.txt
 # The proguard configuration file for the following section is /home/aju/.gradle/caches/transforms-3/c9f76dbd6c0040d72aa2af2c6da9d9ea/transformed/savedstate-1.2.1/proguard.txt
 # Copyright (C) 2019 The Android Open Source Project
 #
@@ -392,6 +385,16 @@
 }
 
 # End of content from /home/aju/.gradle/caches/transforms-3/c9f76dbd6c0040d72aa2af2c6da9d9ea/transformed/savedstate-1.2.1/proguard.txt
+# The proguard configuration file for the following section is /home/aju/.gradle/caches/transforms-3/4ec09bdc154da74cda37a75e0361de3d/transformed/lifecycle-viewmodel-2.6.1/proguard.txt
+-keepclassmembers,allowobfuscation class * extends androidx.lifecycle.ViewModel {
+    <init>();
+}
+
+-keepclassmembers,allowobfuscation class * extends androidx.lifecycle.AndroidViewModel {
+    <init>(android.app.Application);
+}
+
+# End of content from /home/aju/.gradle/caches/transforms-3/4ec09bdc154da74cda37a75e0361de3d/transformed/lifecycle-viewmodel-2.6.1/proguard.txt
 # The proguard configuration file for the following section is /home/aju/.gradle/caches/transforms-3/819fd67e791729965b553b1042d5f994/transformed/ui-release/proguard.txt
 # Copyright (C) 2020 The Android Open Source Project
 #
@@ -488,6 +491,13 @@
     void <clinit>();
 }
 # End of content from /home/aju/.gradle/caches/transforms-3/d4338936567bea3d1a5a0202457fdfd5/transformed/runtime-release/proguard.txt
+# The proguard configuration file for the following section is /home/aju/.gradle/caches/transforms-3/0e679c960ef1e3f0af7fca33bf8b6328/transformed/versionedparcelable-1.1.1/proguard.txt
+-keep class * implements androidx.versionedparcelable.VersionedParcelable
+-keep public class android.support.**Parcelizer { *; }
+-keep public class androidx.**Parcelizer { *; }
+-keep public class androidx.versionedparcelable.ParcelImpl
+
+# End of content from /home/aju/.gradle/caches/transforms-3/0e679c960ef1e3f0af7fca33bf8b6328/transformed/versionedparcelable-1.1.1/proguard.txt
 # The proguard configuration file for the following section is /home/aju/.gradle/caches/transforms-3/cf1d8b6bd8995c0e2957093c2a9e2f16/transformed/rules/lib/META-INF/com.android.tools/r8/coroutines.pro
 # When editing this file, update the following files as well:
 # - META-INF/proguard/coroutines.pro
@@ -542,13 +552,6 @@
 }
 
 # End of content from /home/aju/.gradle/caches/transforms-3/1e8774656c3af0d0ca02d7cabefac319/transformed/rules/lib/META-INF/com.android.tools/r8-from-1.6.0/coroutines.pro
-# The proguard configuration file for the following section is /home/aju/.gradle/caches/transforms-3/0e679c960ef1e3f0af7fca33bf8b6328/transformed/versionedparcelable-1.1.1/proguard.txt
--keep class * implements androidx.versionedparcelable.VersionedParcelable
--keep public class android.support.**Parcelizer { *; }
--keep public class androidx.**Parcelizer { *; }
--keep public class androidx.versionedparcelable.ParcelImpl
-
-# End of content from /home/aju/.gradle/caches/transforms-3/0e679c960ef1e3f0af7fca33bf8b6328/transformed/versionedparcelable-1.1.1/proguard.txt
 # The proguard configuration file for the following section is /home/aju/.gradle/caches/transforms-3/d9ea53f30a4337270a223a7f2be3523e/transformed/startup-runtime-1.1.1/proguard.txt
 # It's important that we preserve initializer names, given they are used in the AndroidManifest.xml.
 -keepnames class * extends androidx.startup.Initializer

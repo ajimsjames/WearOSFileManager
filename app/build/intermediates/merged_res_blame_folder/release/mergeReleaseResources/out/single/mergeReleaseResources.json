@@ -1,22 +1,14 @@
 [
     {
-        "merged": "com.ajimsjames.wearfilemanager.app-release-53:/drawable_ic_launcher.xml.flat",
-        "source": "com.ajimsjames.wearfilemanager.app-main-54:/drawable/ic_launcher.xml"
+        "merged": "com.ajimsjames.wearfilemanager.app-release-52:/drawable_ic_launcher.xml.flat",
+        "source": "com.ajimsjames.wearfilemanager.app-main-53:/drawable/ic_launcher.xml"
     },
     {
-        "merged": "com.ajimsjames.wearfilemanager.app-release-53:/drawable_ic_launcher_round.xml.flat",
-        "source": "com.ajimsjames.wearfilemanager.app-main-54:/drawable/ic_launcher_round.xml"
+        "merged": "com.ajimsjames.wearfilemanager.app-release-52:/drawable_ic_launcher_round.xml.flat",
+        "source": "com.ajimsjames.wearfilemanager.app-main-53:/drawable/ic_launcher_round.xml"
     },
     {
-        "merged": "/home/aju/.gradle/daemon/8.4/com.ajimsjames.wearfilemanager.app-release-53:/drawable_ic_launcher.xml.flat",
-        "source": "/home/aju/.gradle/daemon/8.4/com.ajimsjames.wearfilemanager.app-main-54:/drawable/ic_launcher.xml"
-    },
-    {
-        "merged": "/home/aju/.gradle/daemon/8.4/com.ajimsjames.wearfilemanager.app-release-53:/drawable_ic_launcher_round.xml.flat",
-        "source": "/home/aju/.gradle/daemon/8.4/com.ajimsjames.wearfilemanager.app-main-54:/drawable/ic_launcher_round.xml"
-    },
-    {
-        "merged": "/home/aju/.gradle/daemon/8.4/com.ajimsjames.wearfilemanager.app-release-53:/xml_file_paths.xml.flat",
-        "source": "/home/aju/.gradle/daemon/8.4/com.ajimsjames.wearfilemanager.app-main-54:/xml/file_paths.xml"
+        "merged": "com.ajimsjames.wearfilemanager.app-release-52:/xml_file_paths.xml.flat",
+        "source": "com.ajimsjames.wearfilemanager.app-main-53:/xml/file_paths.xml"
     }
 ]

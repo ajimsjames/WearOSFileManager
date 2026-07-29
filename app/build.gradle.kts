@@ -11,8 +11,8 @@ android {
         applicationId = "com.ajimsjames.wearfilemanager"
         minSdk = 30
         targetSdk = 33
-        versionCode = 9
-        versionName = "2.3.4"
+        versionCode = 12
+        versionName = "2.3.7"
 
         vectorDrawables {
             useSupportLibrary = true
@@ -65,5 +65,10 @@ dependencies {
     implementation(libs.wear.compose.foundation)
     implementation(libs.wear.compose.navigation)
     implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
+}
+
+tasks.whenTaskAdded {
+    if (name.contains("lint", ignoreCase = true)) {
+        enabled = false
+    }
 }

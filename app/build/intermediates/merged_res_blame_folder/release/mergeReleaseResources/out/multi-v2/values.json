@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.ajimsjames.wearfilemanager.app-mergeReleaseResources-51:/values/values.xml",
+            "outputFile": "com.ajimsjames.wearfilemanager.app-mergeReleaseResources-50:/values/values.xml",
             "map": [
                 {
                     "source": "/home/aju/.gradle/caches/transforms-3/5d9973b0f00209439e46d8acaa5c996a/transformed/coordinatorlayout-1.0.0/res/values/values.xml",
@@ -37,23 +37,6 @@
                         "startOffsets": "6790",
                         "endColumns": "82",
                         "endOffsets": "6868"
-                    }
-                },
-                {
-                    "source": "/home/aju/.gradle/caches/transforms-3/876bf0a8beb6bbc1a1b7163904ff99a9/transformed/lifecycle-runtime-2.7.0/res/values/values.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "42",
-                        "endOffsets": "93"
-                    },
-                    "to": {
-                        "startLines": "102",
-                        "startColumns": "4",
-                        "startOffsets": "6392",
-                        "endColumns": "42",
-                        "endOffsets": "6430"
                     }
                 },
                 {
@@ -218,7 +201,7 @@
                     }
                 },
                 {
-                    "source": "/home/aju/.gradle/caches/transforms-3/1474bda20ba5581dca0b8466864c5ca2/transformed/lifecycle-viewmodel-2.7.0/res/values/values.xml",
+                    "source": "/home/aju/.gradle/caches/transforms-3/4ec09bdc154da74cda37a75e0361de3d/transformed/lifecycle-viewmodel-2.6.1/res/values/values.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -287,6 +270,23 @@
                         "startOffsets": "6873,10059",
                         "endColumns": "55,53",
                         "endOffsets": "6924,10108"
+                    }
+                },
+                {
+                    "source": "/home/aju/.gradle/caches/transforms-3/198fc8cb86e9a87aeffef29a305780e1/transformed/lifecycle-runtime-2.6.1/res/values/values.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "42",
+                        "endOffsets": "93"
+                    },
+                    "to": {
+                        "startLines": "102",
+                        "startColumns": "4",
+                        "startOffsets": "6392",
+                        "endColumns": "42",
+                        "endOffsets": "6430"
                     }
                 }
             ]
