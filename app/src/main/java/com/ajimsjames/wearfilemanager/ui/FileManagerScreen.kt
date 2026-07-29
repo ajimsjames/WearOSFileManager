@@ -202,19 +202,61 @@ fun FileManagerScreen() {
                         }
                     }
 
-                    // Up Directory button
-                    if (currentDir.parentFile != null && currentDir.absolutePath != "/storage/emulated/0" && currentDir.absolutePath != "/sdcard") {
-                        item {
+                    // Navigation Buttons Bar
+                    item {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(bottom = 8.dp),
+                            horizontalArrangement = Arrangement.SpaceEvenly,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            // Up / Back Button
                             Box(
                                 modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(bottom = 4.dp)
-                                    .clip(RoundedCornerShape(14.dp))
-                                    .background(Color(0xFF2C2C2E))
-                                    .clickable { currentDir = currentDir.parentFile!! }
-                                    .padding(vertical = 8.dp, horizontal = 12.dp)
+                                    .weight(1f)
+                                    .padding(end = 4.dp)
+                                    .clip(RoundedCornerShape(12.dp))
+                                    .background(if (currentDir.absolutePath != "/storage/emulated/0" && currentDir.absolutePath != "/sdcard") Color(0xFF2C2C2E) else Color(0xFF151517))
+                                    .clickable(enabled = currentDir.absolutePath != "/storage/emulated/0" && currentDir.absolutePath != "/sdcard") {
+                                        currentDir = currentDir.parentFile ?: currentDir
+                                    }
+                                    .padding(vertical = 6.dp),
+                                contentAlignment = Alignment.Center
                             ) {
-                                Text("📁  .. (Parent Folder)", color = Color.White, fontSize = 11.sp)
+                                Text("⬅️ Up", color = if (currentDir.absolutePath != "/storage/emulated/0" && currentDir.absolutePath != "/sdcard") Color.White else Color.DarkGray, fontSize = 9.sp, fontWeight = FontWeight.Bold)
+                            }
+                            
+                            // Home Button
+                            Box(
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .padding(horizontal = 2.dp)
+                                    .clip(RoundedCornerShape(12.dp))
+                                    .background(Color(0xFF2C2C2E))
+                                    .clickable {
+                                        currentDir = Environment.getExternalStorageDirectory()
+                                    }
+                                    .padding(vertical = 6.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Text("🏠 Home", color = Color.White, fontSize = 9.sp, fontWeight = FontWeight.Bold)
+                            }
+
+                            // Reload Button
+                            Box(
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .padding(start = 4.dp)
+                                    .clip(RoundedCornerShape(12.dp))
+                                    .background(Color(0xFF2C2C2E))
+                                    .clickable {
+                                        refreshKey++
+                                    }
+                                    .padding(vertical = 6.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Text("🔄 Reload", color = Color.White, fontSize = 9.sp, fontWeight = FontWeight.Bold)
                             }
                         }
                     }
