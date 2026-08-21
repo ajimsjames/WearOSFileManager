@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.wearfilemanager"
+    namespace = "com.ajugeorge.wearfilemanager"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.wearfilemanager"
+        applicationId = "com.ajugeorge.wearfilemanager"
         minSdk = 30
         targetSdk = 34
         versionCode = 4

@@ -1,0 +1,7 @@
+com.ajugeorge.wearfilemanager
+drawable ic_launcher
+drawable ic_launcher_round
+string app_name
+string developer_name
+style Theme_WearFileManager
+xml file_paths
