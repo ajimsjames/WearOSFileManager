@@ -274,8 +274,10 @@ fun FileManagerScreen() {
                 CurvedLayout(
                     anchor = 90f,
                     anchorType = androidx.wear.compose.foundation.AnchorType.Center,
+                    angularDirection = androidx.wear.compose.foundation.CurvedDirection.Angular.CounterClockwise,
                     modifier = Modifier.fillMaxSize()
                 ) {
+
                     curvedComposable {
                         Box(
                             modifier = Modifier
