@@ -23,7 +23,10 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.FileProvider
+import androidx.wear.compose.foundation.CurvedLayout
+import androidx.wear.compose.foundation.curvedComposable
 import androidx.wear.compose.material.Text
+
 import com.example.wearfilemanager.model.FileItem
 import java.io.File
 import java.util.Locale
@@ -44,25 +47,38 @@ fun FileManagerScreen() {
     var refreshKey by remember { mutableStateOf(0) }
 
     // Read Directory items
-    val fileItems by remember(currentDir, refreshKey) {
-        mutableStateOf(
-            currentDir.listFiles()
-                ?.filter { !it.name.startsWith(".") }
-                ?.sortedWith(compareBy({ !it.isDirectory }, { it.name.lowercase() }))
-                ?.map { FileItem(it) }
-                ?: emptyList()
-        )
+    val fileItems: List<FileItem> = remember(currentDir, refreshKey) {
+        currentDir.listFiles()
+            ?.filter { !it.name.startsWith(".") }
+            ?.sortedWith(compareBy({ !it.isDirectory }, { it.name.lowercase(Locale.US) }))
+            ?.map { FileItem(it) }
+            ?: emptyList()
     }
 
-    val storageInfo by remember(refreshKey) {
-        mutableStateOf(getStorageStats())
+    val storageInfo = remember(refreshKey) {
+        getStorageStats()
     }
+
 
     fun openFile(fileItem: FileItem) {
         val file = fileItem.file
         val ext = file.extension.lowercase(Locale.US)
 
         when {
+            // APK -> Direct Android Package Installer Trigger
+            ext == "apk" -> {
+                try {
+                    val uri: Uri = FileProvider.getUriForFile(context, "com.example.wearfilemanager.fileprovider", file)
+                    val intent = Intent(Intent.ACTION_VIEW).apply {
+                        setDataAndType(uri, "application/vnd.android.package-archive")
+                        addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_ACTIVITY_NEW_TASK)
+                    }
+                    context.startActivity(intent)
+                    Toast.makeText(context, "Opening Package Installer...", Toast.LENGTH_SHORT).show()
+                } catch (e: Exception) {
+                    Toast.makeText(context, "APK Install Error: ${e.localizedMessage}", Toast.LENGTH_SHORT).show()
+                }
+            }
             // PDF -> Open Wear PDF Reader directly with URI
             ext == "pdf" -> {
                 try {
@@ -114,6 +130,8 @@ fun FileManagerScreen() {
         }
     }
 
+    var showAboutDialog by remember { mutableStateOf(false) }
+
     when (val viewer = activeViewer) {
         is ActiveViewer.TextViewer -> {
             TextViewerScreen(file = viewer.file, onClose = { activeViewer = ActiveViewer.None })
@@ -128,51 +146,38 @@ fun FileManagerScreen() {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(Color.Black)
-                    .padding(horizontal = 8.dp)
+                    .background(Color(0xFF0D0E11))
             ) {
                 LazyColumn(
                     modifier = Modifier.fillMaxSize(),
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    contentPadding = PaddingValues(vertical = 24.dp)
+                    contentPadding = PaddingValues(top = 40.dp, bottom = 44.dp, start = 10.dp, end = 10.dp),
+                    verticalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
-                    item {
-                        Text(
-                            text = "Watch File Manager",
-                            color = Color.White,
-                            fontSize = 15.sp,
-                            fontWeight = FontWeight.Bold,
-                            modifier = Modifier.padding(bottom = 2.dp)
-                        )
-                    }
-
                     // Storage Indicator Card
                     item {
-                        Box(
+                        Column(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(bottom = 8.dp)
                                 .clip(RoundedCornerShape(14.dp))
-                                .background(Color(0xFF1C1C1E))
+                                .background(Color(0xFF16181D))
                                 .padding(8.dp),
-                            contentAlignment = Alignment.Center
+                            horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-                            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                Text(
-                                    text = "Storage: ${storageInfo.first} / ${storageInfo.second}",
-                                    color = Color(0xFF81D4FA),
-                                    fontSize = 10.sp,
-                                    fontWeight = FontWeight.Medium
-                                )
-                                Spacer(modifier = Modifier.height(4.dp))
-                                Text(
-                                    text = currentDir.name.ifEmpty { "/sdcard" },
-                                    color = Color.Gray,
-                                    fontSize = 10.sp,
-                                    maxLines = 1,
-                                    overflow = TextOverflow.Ellipsis
-                                )
-                            }
+                            Text(
+                                text = "💾 Storage: ${storageInfo.first} / ${storageInfo.second}",
+                                color = Color(0xFF00E5FF),
+                                fontSize = 10.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                            Spacer(modifier = Modifier.height(2.dp))
+                            Text(
+                                text = currentDir.name.ifEmpty { "Internal Storage" },
+                                color = Color.Gray,
+                                fontSize = 9.sp,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis
+                            )
                         }
                     }
 
@@ -182,13 +187,12 @@ fun FileManagerScreen() {
                             Box(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .padding(bottom = 4.dp)
-                                    .clip(RoundedCornerShape(14.dp))
-                                    .background(Color(0xFF2C2C2E))
+                                    .clip(RoundedCornerShape(12.dp))
+                                    .background(Color(0xFF21242D))
                                     .clickable { currentDir = currentDir.parentFile!! }
-                                    .padding(vertical = 8.dp, horizontal = 12.dp)
+                                    .padding(vertical = 6.dp, horizontal = 10.dp)
                             ) {
-                                Text("📁  .. (Parent Folder)", color = Color.White, fontSize = 11.sp)
+                                Text("📁  .. (Parent Folder)", color = Color.White, fontSize = 10.sp, fontWeight = FontWeight.Bold)
                             }
                         }
                     }
@@ -198,8 +202,8 @@ fun FileManagerScreen() {
                             Text(
                                 text = "Empty Directory",
                                 color = Color.Gray,
-                                fontSize = 12.sp,
-                                modifier = Modifier.padding(top = 20.dp)
+                                fontSize = 11.sp,
+                                modifier = Modifier.padding(top = 16.dp)
                             )
                         }
                     } else {
@@ -207,9 +211,8 @@ fun FileManagerScreen() {
                             Box(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .padding(vertical = 3.dp)
-                                    .clip(RoundedCornerShape(14.dp))
-                                    .background(if (item.isDirectory) Color(0xFF1E2A38) else Color(0xFF1C1C1E))
+                                    .clip(RoundedCornerShape(12.dp))
+                                    .background(if (item.isDirectory) Color(0xFF16181D) else Color(0xFF1A1D24))
                                     .clickable {
                                         if (item.isDirectory) {
                                             currentDir = item.file
@@ -217,7 +220,7 @@ fun FileManagerScreen() {
                                             selectedFileItem = item
                                         }
                                     }
-                                    .padding(horizontal = 12.dp, vertical = 8.dp)
+                                    .padding(horizontal = 10.dp, vertical = 6.dp)
                             ) {
                                 Row(
                                     verticalAlignment = Alignment.CenterVertically,
@@ -225,23 +228,22 @@ fun FileManagerScreen() {
                                 ) {
                                     Text(
                                         text = item.fileTypeIcon,
-                                        fontSize = 16.sp,
+                                        fontSize = 15.sp,
                                         modifier = Modifier.padding(end = 8.dp)
                                     )
                                     Column(modifier = Modifier.weight(1f)) {
                                         Text(
                                             text = item.name,
                                             color = Color.White,
-                                            fontSize = 12.sp,
+                                            fontSize = 11.sp,
                                             maxLines = 1,
                                             overflow = TextOverflow.Ellipsis,
-                                            fontWeight = FontWeight.Medium
+                                            fontWeight = FontWeight.SemiBold
                                         )
                                         Text(
                                             text = "${item.formattedSize} • ${item.formattedDate}",
                                             color = Color.Gray,
-                                            fontSize = 9.sp,
-                                            modifier = Modifier.padding(top = 1.dp)
+                                            fontSize = 8.5.sp
                                         )
                                     }
                                 }
@@ -250,71 +252,128 @@ fun FileManagerScreen() {
                     }
                 }
 
+                // Top Curved Bezel Title / Status
+                CurvedLayout(
+                    anchor = 270f,
+                    anchorType = androidx.wear.compose.foundation.AnchorType.Center,
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    curvedComposable {
+                        Box(
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(12.dp))
+                                .background(Color(0xEE16181D))
+                                .padding(horizontal = 10.dp, vertical = 3.dp)
+                        ) {
+                            Text("📁 File Explorer", color = Color.White, fontSize = 9.5.sp, fontWeight = FontWeight.Bold)
+                        }
+                    }
+                }
+
+                // Bottom Curved Bezel Actions Pill
+                CurvedLayout(
+                    anchor = 90f,
+                    anchorType = androidx.wear.compose.foundation.AnchorType.Center,
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    curvedComposable {
+                        Box(
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(10.dp))
+                                .background(Color(0xEE21242D))
+                                .clickable { refreshKey++ }
+                                .padding(horizontal = 8.dp, vertical = 3.dp)
+                        ) {
+                            Text("🔄 Refresh", color = Color(0xFF00E5FF), fontSize = 8.5.sp, fontWeight = FontWeight.Bold)
+                        }
+                    }
+                    curvedComposable {
+                        Spacer(modifier = Modifier.width(4.dp))
+                    }
+                    curvedComposable {
+                        Box(
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(10.dp))
+                                .background(Color(0xEE21242D))
+                                .clickable { showAboutDialog = true }
+                                .padding(horizontal = 8.dp, vertical = 3.dp)
+                        ) {
+                            Text("ℹ️ About", color = Color(0xFFFFAB00), fontSize = 8.5.sp, fontWeight = FontWeight.Bold)
+                        }
+                    }
+                }
+
+
+
                 // File Action Modal Dialog
                 selectedFileItem?.let { fileItem ->
                     Box(
                         modifier = Modifier
                             .fillMaxSize()
-                            .background(Color(0xFEE000000))
+                            .background(Color(0xF0000000))
                             .clickable { selectedFileItem = null }
-                            .padding(16.dp),
+                            .padding(14.dp),
                         contentAlignment = Alignment.Center
                     ) {
                         Box(
                             modifier = Modifier
-                                .fillMaxWidth(0.95f)
+                                .fillMaxWidth()
                                 .clip(RoundedCornerShape(18.dp))
-                                .background(Color(0xFF222224))
-                                .padding(14.dp)
+                                .background(Color(0xFF16181D))
+                                .padding(12.dp)
                         ) {
                             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                                 Text(
                                     text = fileItem.name,
                                     color = Color.White,
-                                    fontSize = 13.sp,
+                                    fontSize = 11.sp,
                                     fontWeight = FontWeight.Bold,
                                     maxLines = 2,
                                     overflow = TextOverflow.Ellipsis
                                 )
 
-                                Spacer(modifier = Modifier.height(4.dp))
+                                Spacer(modifier = Modifier.height(2.dp))
 
                                 Text(
                                     text = "${fileItem.formattedSize} • ${fileItem.formattedDate}",
                                     color = Color.Gray,
-                                    fontSize = 10.sp
+                                    fontSize = 9.sp
                                 )
 
-                                Spacer(modifier = Modifier.height(12.dp))
+                                Spacer(modifier = Modifier.height(8.dp))
 
-                                // Open Button
+                                // Open / Install Button
                                 Box(
                                     modifier = Modifier
                                         .fillMaxWidth()
                                         .padding(bottom = 6.dp)
-                                        .clip(RoundedCornerShape(12.dp))
-                                        .background(Color(0xFF1565C0))
+                                        .clip(RoundedCornerShape(10.dp))
+                                        .background(if (fileItem.file.extension.equals("apk", ignoreCase = true)) Color(0xFF00E676) else Color(0xFF00E5FF))
                                         .clickable {
                                             val itemToOpen = fileItem
                                             selectedFileItem = null
                                             openFile(itemToOpen)
                                         }
-                                        .padding(vertical = 8.dp),
+                                        .padding(vertical = 6.dp),
                                     contentAlignment = Alignment.Center
                                 ) {
-                                    Text("👁️ Open File", color = Color.White, fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                                    Text(
+                                        text = if (fileItem.file.extension.equals("apk", ignoreCase = true)) "📦 Install APK" else "👁️ Open File",
+                                        color = Color.Black,
+                                        fontSize = 10.sp,
+                                        fontWeight = FontWeight.Bold
+                                    )
                                 }
 
                                 Row(
                                     modifier = Modifier.fillMaxWidth(),
                                     horizontalArrangement = Arrangement.SpaceEvenly
                                 ) {
-                                    // Delete Button
                                     Box(
                                         modifier = Modifier
                                             .weight(1f)
                                             .padding(end = 4.dp)
-                                            .clip(RoundedCornerShape(12.dp))
+                                            .clip(RoundedCornerShape(10.dp))
                                             .background(Color(0xFFD32F2F))
                                             .clickable {
                                                 if (fileItem.file.delete()) {
@@ -325,26 +384,66 @@ fun FileManagerScreen() {
                                                     Toast.makeText(context, "Failed to delete file", Toast.LENGTH_SHORT).show()
                                                 }
                                             }
-                                            .padding(vertical = 8.dp),
+                                            .padding(vertical = 6.dp),
                                         contentAlignment = Alignment.Center
                                     ) {
-                                        Text("🗑️ Delete", color = Color.White, fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                                        Text("🗑️ Delete", color = Color.White, fontSize = 9.5.sp, fontWeight = FontWeight.Bold)
                                     }
 
-                                    // Close Button
                                     Box(
                                         modifier = Modifier
                                             .weight(1f)
                                             .padding(start = 4.dp)
-                                            .clip(RoundedCornerShape(12.dp))
-                                            .background(Color(0xFF444446))
+                                            .clip(RoundedCornerShape(10.dp))
+                                            .background(Color(0xFF21242D))
                                             .clickable { selectedFileItem = null }
-                                            .padding(vertical = 8.dp),
+                                            .padding(vertical = 6.dp),
                                         contentAlignment = Alignment.Center
                                     ) {
-                                        Text("Close", color = Color.White, fontSize = 11.sp)
+                                        Text("Close", color = Color.White, fontSize = 9.5.sp)
                                     }
                                 }
+                            }
+                        }
+                    }
+                }
+
+                // About Modal Dialog
+                if (showAboutDialog) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(Color(0xF0000000))
+                            .clickable { showAboutDialog = false }
+                            .padding(14.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clip(RoundedCornerShape(18.dp))
+                                .background(Color(0xFF16181D))
+                                .padding(12.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Text("📁 WearOSFileManager", color = Color.White, fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                            Text("Version 2.4.0 (Code 4)", color = Color(0xFF00E5FF), fontSize = 9.sp, fontWeight = FontWeight.SemiBold)
+                            Spacer(modifier = Modifier.height(4.dp))
+                            Text("Changelog v2.4.0:", color = Color(0xFFFFAB00), fontSize = 8.5.sp, fontWeight = FontWeight.Bold)
+                            Text("• Material 3 OLED Circular Bezel HUD", color = Color.LightGray, fontSize = 8.sp)
+                            Text("• Direct APK Package Sideload Installer", color = Color.LightGray, fontSize = 8.sp)
+                            Text("• Fast Storage Telemetry & Media Viewer", color = Color.LightGray, fontSize = 8.sp)
+                            Spacer(modifier = Modifier.height(6.dp))
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .clip(RoundedCornerShape(10.dp))
+                                    .background(Color(0xFF21242D))
+                                    .clickable { showAboutDialog = false }
+                                    .padding(vertical = 4.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Text("Dismiss", color = Color.White, fontSize = 9.sp)
                             }
                         }
                     }
@@ -376,3 +475,4 @@ private fun getStorageStats(): Pair<String, String> {
         Pair("N/A", "N/A")
     }
 }
+
